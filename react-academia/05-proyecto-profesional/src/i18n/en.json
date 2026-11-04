@@ -1,0 +1,27 @@
+{
+  "menu": {
+    "courses": "Courses",
+    "myCourses": "My courses ({{amount}})",
+    "admin": "Admin",
+    "login": "Log in",
+    "logout": "Log out",
+    "hello": "Hi, {{name}}"
+  },
+  "catalog": {
+    "title": "Course catalogue",
+    "loading": "Loading courses...",
+    "error": "Courses could not be loaded.",
+    "courses_one": "{{count}} course",
+    "courses_other": "{{count}} courses",
+    "all": "All"
+  },
+  "course": {
+    "hours": "{{hours}} hours",
+    "lastSeats": "Last places",
+    "add": "Add to My courses",
+    "remove": "Remove from My courses"
+  },
+  "search": {
+    "label": "Search courses"
+  }
+}
