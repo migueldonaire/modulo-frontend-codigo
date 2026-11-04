@@ -4,7 +4,7 @@ Cada carpeta es la app Academia tal como queda al terminar una sesión de los ap
 
 | Carpeta | Apuntes | Qué contiene |
 |---|---|---|
-| `01-componentes-props-estado` | `01_react_componentes_props_estado.md` | Catálogo con componentes, props, listas, eventos, `useState` y CSS Modules. |
+| `01-componentes-props-state` | `01_react_componentes_props_estado.md` | Catálogo con componentes, props, listas, eventos, `useState` y CSS Modules. |
 | `02-formularios-comunicacion` | `02_react_formularios_comunicacion.md` | Formulario de inscripción, buscador, estado elevado, Context y React Hook Form + Zod. |
 | `03-efectos-api-rutas` | `03_react_efectos_api_rutas.md` | `useEffect`, API con json-server, hooks propios y React Router. |
 | `04-redux-toolkit-login` | `04_react_redux_toolkit_login.md` | Redux Toolkit, RTK Query, login falso y ruta protegida. |

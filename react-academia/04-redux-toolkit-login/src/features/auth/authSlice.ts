@@ -1,31 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Usuario } from "../../services/authService";
+import type { User } from "../../services/authService";
 
 type AuthState = {
   token: string | null;
-  usuario: Usuario | null; // null = nadie ha entrado
+  user: User | null; // null = nadie ha entrado
 };
 
 const initialState: AuthState = {
   token: null,
-  usuario: null,
+  user: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    sesionIniciada(state, action: PayloadAction<{ token: string; usuario: Usuario }>) {
+    loggedIn(state, action: PayloadAction<{ token: string; user: User }>) {
       state.token = action.payload.token;
-      state.usuario = action.payload.usuario;
+      state.user = action.payload.user;
     },
-    sesionCerrada(state) {
+    loggedOut(state) {
       state.token = null;
-      state.usuario = null;
+      state.user = null;
     },
   },
 });
 
-export const { sesionIniciada, sesionCerrada } = authSlice.actions;
+export const { loggedIn, loggedOut } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,30 +1,34 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useBorrarCursoMutation, useCrearCursoMutation, useGetCursosQuery } from "../../app/api";
+import {
+  useDeleteCourseMutation,
+  useCreateCourseMutation,
+  useGetCoursesQuery,
+} from "../../app/api";
 
 export function AdminPage() {
-  const { data: cursos = [], isLoading } = useGetCursosQuery();
+  const { data: courses = [], isLoading } = useGetCoursesQuery();
   // Una mutation devuelve [la función que la lanza, su estado]
-  const [crearCurso, { isLoading: creando }] = useCrearCursoMutation();
-  const [borrarCurso] = useBorrarCursoMutation();
+  const [createCourse, { isLoading: creating }] = useCreateCourseMutation();
+  const [deleteCourse] = useDeleteCourseMutation();
 
   // El formulario "Nuevo curso"
-  const [titulo, setTitulo] = useState("");
-  const [categoria, setCategoria] = useState("Programación");
-  const [precio, setPrecio] = useState("100");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("Programación");
+  const [price, setPrice] = useState("100");
 
-  async function guardar(e: FormEvent<HTMLFormElement>) {
+  async function save(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (titulo.trim() === "") return;
-    await crearCurso({
-      titulo: titulo.trim(),
-      categoria,
-      precio: Number(precio), // el input da un texto
-      horas: 20,
-      plazas: 20,
-      descripcion: "",
+    if (title.trim() === "") return;
+    await createCourse({
+      title: title.trim(),
+      category,
+      price: Number(price), // el input da un texto
+      hours: 20,
+      seats: 20,
+      description: "",
     }).unwrap(); // si la API falla, lanza un error
-    setTitulo("");
+    setTitle("");
   }
 
   if (isLoading) {
@@ -44,40 +48,40 @@ export function AdminPage() {
           </tr>
         </thead>
         <tbody>
-          {cursos.map((curso) => (
-            <tr key={curso.id}>
-              <td>{curso.titulo}</td>
-              <td>{curso.categoria}</td>
-              <td>{curso.precio} €</td>
+          {courses.map((course) => (
+            <tr key={course.id}>
+              <td>{course.title}</td>
+              <td>{course.category}</td>
+              <td>{course.price} €</td>
               <td>
-                <button onClick={() => borrarCurso(curso.id)}>Borrar</button>
+                <button onClick={() => deleteCourse(course.id)}>Borrar</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <form onSubmit={guardar}>
+      <form onSubmit={save}>
         <h2>Nuevo curso</h2>
-        <label htmlFor="titulo">Título</label>
-        <input id="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} />
-        <label htmlFor="categoria">Categoría</label>
-        <select id="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+        <label htmlFor="title">Título</label>
+        <input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <label htmlFor="category">Categoría</label>
+        <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option>Programación</option>
           <option>Diseño</option>
           <option>Idiomas</option>
           <option>Ofimática</option>
         </select>
-        <label htmlFor="precio">Precio (€)</label>
+        <label htmlFor="price">Precio (€)</label>
         <input
-          id="precio"
+          id="price"
           type="number"
           min="0"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
         />
-        <button type="submit" disabled={creando}>
-          {creando ? "Guardando..." : "Guardar curso"}
+        <button type="submit" disabled={creating}>
+          {creating ? "Guardando..." : "Guardar curso"}
         </button>
       </form>
     </>

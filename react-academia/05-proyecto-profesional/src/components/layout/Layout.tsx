@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
-import { Cabecera } from "./Cabecera";
+import { Header } from "./Header";
 
 export function Layout() {
   return (
     <>
-      <Cabecera />
+      <Header />
       <main>
         <Outlet />
       </main>

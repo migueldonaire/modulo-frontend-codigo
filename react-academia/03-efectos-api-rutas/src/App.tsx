@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { MisCursosProvider } from "./context/MisCursosProvider";
+import { MyCoursesProvider } from "./context/MyCoursesProvider";
 import { Layout } from "./components/Layout";
-import { CatalogoPage } from "./pages/CatalogoPage";
-import { CursoPage } from "./pages/CursoPage";
-import { MisCursosPage } from "./pages/MisCursosPage";
-import { InscripcionPage } from "./pages/InscripcionPage";
-import { NoEncontradaPage } from "./pages/NoEncontradaPage";
+import { CatalogPage } from "./pages/CatalogPage";
+import { CoursePage } from "./pages/CoursePage";
+import { MyCoursesPage } from "./pages/MyCoursesPage";
+import { EnrollmentPage } from "./pages/EnrollmentPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 // La lista de rutas: qué componente va con cada dirección
 const router = createBrowserRouter([
@@ -13,20 +13,20 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />, // el layout envuelve a todas las páginas de dentro
     children: [
-      { index: true, element: <CatalogoPage /> }, // la página de "/"
-      { path: "cursos/:id", element: <CursoPage /> }, // :id = un parámetro
-      { path: "mis-cursos", element: <MisCursosPage /> },
-      { path: "inscripcion", element: <InscripcionPage /> },
-      { path: "*", element: <NoEncontradaPage /> }, // cualquier otra dirección
+      { index: true, element: <CatalogPage /> }, // la página de "/"
+      { path: "courses/:id", element: <CoursePage /> }, // :id = un parámetro
+      { path: "my-courses", element: <MyCoursesPage /> },
+      { path: "enrollment", element: <EnrollmentPage /> },
+      { path: "*", element: <NotFoundPage /> }, // cualquier otra dirección
     ],
   },
 ]);
 
 function App() {
   return (
-    <MisCursosProvider>
+    <MyCoursesProvider>
       <RouterProvider router={router} />
-    </MisCursosProvider>
+    </MyCoursesProvider>
   );
 }
 

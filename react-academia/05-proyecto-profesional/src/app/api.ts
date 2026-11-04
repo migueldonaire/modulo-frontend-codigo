@@ -1,23 +1,23 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "./store";
 
-export type Curso = {
+export type Course = {
   id: string;
-  titulo: string;
-  categoria: string;
-  horas: number;
-  precio: number;
-  plazas: number;
-  descripcion: string;
+  title: string;
+  category: string;
+  hours: number;
+  price: number;
+  seats: number;
+  description: string;
 };
 
-export type NuevoCurso = Omit<Curso, "id">; // un Curso sin id: el id lo pone la API
+export type NewCourse = Omit<Course, "id">; // un Curso sin id: el id lo pone la API
 
-export type NuevaInscripcion = {
-  cursoId: string;
-  nombre: string;
+export type NewEnrollment = {
+  courseId: string;
+  name: string;
   email: string;
-  modalidad: string;
+  mode: string;
 };
 
 export const api = createApi({
@@ -33,37 +33,37 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Curso"], // los nombres de las etiquetas
+  tagTypes: ["Course"], // los nombres de las etiquetas
   endpoints: (builder) => ({
     // query = leer. <lo que devuelve, lo que recibe>
-    getCursos: builder.query<Curso[], void>({
-      query: () => "/cursos", // GET /cursos
-      providesTags: ["Curso"], // "estos datos son de tipo Curso"
+    getCourses: builder.query<Course[], void>({
+      query: () => "/courses", // GET /courses
+      providesTags: ["Course"], // "estos datos son de tipo Course"
     }),
-    getCurso: builder.query<Curso, string>({
-      query: (id) => `/cursos/${id}`, // GET /cursos/3
-      providesTags: ["Curso"],
+    getCourse: builder.query<Course, string>({
+      query: (id) => `/courses/${id}`, // GET /courses/3
+      providesTags: ["Course"],
     }),
     // mutation = cambiar
-    crearCurso: builder.mutation<Curso, NuevoCurso>({
-      query: (curso) => ({ url: "/cursos", method: "POST", body: curso }),
-      invalidatesTags: ["Curso"], // "después de esto, los datos de tipo Curso están viejos"
+    createCourse: builder.mutation<Course, NewCourse>({
+      query: (course) => ({ url: "/courses", method: "POST", body: course }),
+      invalidatesTags: ["Course"], // "después de esto, los datos de tipo Course están viejos"
     }),
-    borrarCurso: builder.mutation<void, string>({
-      query: (id) => ({ url: `/cursos/${id}`, method: "DELETE" }),
-      invalidatesTags: ["Curso"],
+    deleteCourse: builder.mutation<void, string>({
+      query: (id) => ({ url: `/courses/${id}`, method: "DELETE" }),
+      invalidatesTags: ["Course"],
     }),
-    crearInscripcion: builder.mutation<NuevaInscripcion, NuevaInscripcion>({
-      query: (inscripcion) => ({ url: "/inscripciones", method: "POST", body: inscripcion }),
+    createEnrollment: builder.mutation<NewEnrollment, NewEnrollment>({
+      query: (enrollment) => ({ url: "/enrollments", method: "POST", body: enrollment }),
     }),
   }),
 });
 
 // Los hooks que crea RTK Query: use + nombre del endpoint + Query o Mutation
 export const {
-  useGetCursosQuery,
-  useGetCursoQuery,
-  useCrearCursoMutation,
-  useBorrarCursoMutation,
-  useCrearInscripcionMutation,
+  useGetCoursesQuery,
+  useGetCourseQuery,
+  useCreateCourseMutation,
+  useDeleteCourseMutation,
+  useCreateEnrollmentMutation,
 } = api;

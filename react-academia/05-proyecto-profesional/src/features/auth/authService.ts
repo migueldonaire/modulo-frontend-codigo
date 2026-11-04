@@ -1,29 +1,29 @@
-export type Usuario = {
+export type User = {
   id: string;
   email: string;
-  nombre: string;
-  rol: "admin" | "alumno"; // solo uno de estos dos textos
+  name: string;
+  role: "admin" | "student"; // solo uno de estos dos textos
 };
 
-type UsuarioGuardado = Usuario & { password: string }; // Usuario + password
+type StoredUser = User & { password: string }; // Usuario + password
 
 // Login FALSO. Con una API de verdad sería un POST /auth/login que devuelve un JWT
 export async function login(
   email: string,
   password: string,
-): Promise<{ token: string; usuario: Usuario }> {
-  const respuesta = await fetch(
-    `${import.meta.env.VITE_API_URL}/usuarios?email=${encodeURIComponent(email)}`,
+): Promise<{ token: string; user: User }> {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/users?email=${encodeURIComponent(email)}`,
   );
-  if (!respuesta.ok) {
-    throw new Error(`Error ${respuesta.status}`);
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}`);
   }
-  const usuarios: UsuarioGuardado[] = await respuesta.json();
-  const encontrado = usuarios.find((u) => u.password === password);
-  if (!encontrado) {
+  const users: StoredUser[] = await response.json();
+  const found = users.find((u) => u.password === password);
+  if (!found) {
     throw new Error("Email o contraseña incorrectos.");
   }
   // Sacamos la contraseña y nos quedamos con el resto
-  const { password: _password, ...usuario } = encontrado;
-  return { token: `token-falso-${usuario.id}`, usuario };
+  const { password: _password, ...user } = found;
+  return { token: `token-fake-${user.id}`, user };
 }

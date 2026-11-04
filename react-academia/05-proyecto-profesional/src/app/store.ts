@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import misCursosReducer from "../features/misCursos/misCursosSlice";
+import myCoursesReducer from "../features/myCourses/myCoursesSlice";
 import authReducer from "../features/auth/authSlice";
 import { api } from "./api";
 
 // Lee una clave de localStorage. Si no hay nada o está mal, undefined
-function leerGuardado(clave: string) {
+function loadSaved(key: string) {
   try {
-    const texto = localStorage.getItem(clave);
-    return texto ? JSON.parse(texto) : undefined;
+    const text = localStorage.getItem(key);
+    return text ? JSON.parse(text) : undefined;
   } catch {
     return undefined;
   }
@@ -15,7 +15,7 @@ function leerGuardado(clave: string) {
 
 export const store = configureStore({
   reducer: {
-    misCursos: misCursosReducer,
+    myCourses: myCoursesReducer,
     auth: authReducer,
     [api.reducerPath]: api.reducer, // la caché de RTK Query
   },
@@ -23,15 +23,15 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
   // Con qué estado arranca el store (si es undefined, usa el initialState)
   preloadedState: {
-    misCursos: leerGuardado("misCursos"),
-    auth: leerGuardado("auth"),
+    myCourses: loadSaved("myCourses"),
+    auth: loadSaved("auth"),
   },
 });
 
 // Después de cada acción, guarda Mis cursos y la sesión
 store.subscribe(() => {
-  const { misCursos, auth } = store.getState();
-  localStorage.setItem("misCursos", JSON.stringify(misCursos));
+  const { myCourses, auth } = store.getState();
+  localStorage.setItem("myCourses", JSON.stringify(myCourses));
   localStorage.setItem("auth", JSON.stringify(auth));
 });
 

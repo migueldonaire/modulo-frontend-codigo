@@ -11,7 +11,7 @@ main {
   padding: 24px;
 }
 
-.cabecera {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,18 +20,18 @@ main {
   border-bottom: 1px solid #e3e6eb;
 }
 
-.cabecera nav {
+.header nav {
   display: flex;
   gap: 16px;
 }
 
-.filtros {
+.filters {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.rejilla {
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;

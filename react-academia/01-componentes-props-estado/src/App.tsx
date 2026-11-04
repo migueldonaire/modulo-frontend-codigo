@@ -1,11 +1,11 @@
-import { Cabecera } from "./components/Cabecera";
-import { Catalogo } from "./components/Catalogo";
+import { Header } from "./components/Header";
+import { Catalog } from "./components/Catalog";
 
 function App() {
   return (
     <>
-      <Cabecera />
-      <Catalogo />
+      <Header />
+      <Catalog />
     </>
   );
 }

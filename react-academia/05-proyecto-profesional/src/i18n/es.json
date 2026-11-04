@@ -1,27 +1,27 @@
 {
   "menu": {
-    "cursos": "Cursos",
-    "misCursos": "Mis cursos ({{cantidad}})",
+    "courses": "Cursos",
+    "myCourses": "Mis cursos ({{amount}})",
     "admin": "Admin",
-    "entrar": "Entrar",
-    "salir": "Cerrar sesión",
-    "hola": "Hola, {{nombre}}"
+    "login": "Entrar",
+    "logout": "Cerrar sesión",
+    "hello": "Hola, {{name}}"
   },
-  "catalogo": {
-    "titulo": "Catálogo de cursos",
-    "cargando": "Cargando cursos...",
+  "catalog": {
+    "title": "Catálogo de cursos",
+    "loading": "Cargando cursos...",
     "error": "No se han podido cargar los cursos.",
-    "cursos_one": "{{count}} curso",
-    "cursos_other": "{{count}} cursos",
-    "todas": "Todas"
+    "courses_one": "{{count}} curso",
+    "courses_other": "{{count}} cursos",
+    "all": "Todas"
   },
-  "curso": {
-    "horas": "{{horas}} horas",
-    "ultimasPlazas": "Últimas plazas",
-    "anadir": "Añadir a Mis cursos",
-    "quitar": "Quitar de Mis cursos"
+  "course": {
+    "hours": "{{hours}} horas",
+    "lastSeats": "Últimas plazas",
+    "add": "Añadir a Mis cursos",
+    "remove": "Quitar de Mis cursos"
   },
-  "buscador": {
-    "etiqueta": "Buscar curso"
+  "search": {
+    "label": "Buscar curso"
   }
 }

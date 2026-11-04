@@ -1,21 +1,21 @@
-import { MisCursosProvider } from "./context/MisCursosProvider";
-import { Cabecera } from "./components/Cabecera";
-import { Catalogo } from "./components/Catalogo";
-import { MisCursos } from "./components/MisCursos";
-import { FormularioInscripcion } from "./components/FormularioInscripcion";
-import { FormularioInscripcionRHF } from "./components/FormularioInscripcionRHF";
+import { MyCoursesProvider } from "./context/MyCoursesProvider";
+import { Header } from "./components/Header";
+import { Catalog } from "./components/Catalog";
+import { MyCourses } from "./components/MyCourses";
+import { EnrollmentForm } from "./components/EnrollmentForm";
+import { EnrollmentFormRHF } from "./components/EnrollmentFormRHF";
 
 function App() {
   return (
-    <MisCursosProvider>
-      <Cabecera />
-      <Catalogo />
+    <MyCoursesProvider>
+      <Header />
+      <Catalog />
       <main>
-        <MisCursos />
-        <FormularioInscripcion />
-        <FormularioInscripcionRHF />
+        <MyCourses />
+        <EnrollmentForm />
+        <EnrollmentFormRHF />
       </main>
-    </MisCursosProvider>
+    </MyCoursesProvider>
   );
 }
 

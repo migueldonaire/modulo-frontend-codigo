@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
-import { Cabecera } from "./Cabecera";
+import { Header } from "./Header";
 
 export function Layout() {
   return (
     <>
-      <Cabecera /> {/* en todas las páginas */}
+      <Header /> {/* en todas las páginas */}
       <main>
         <Outlet /> {/* aquí se pinta la página que toca según la URL */}
       </main>

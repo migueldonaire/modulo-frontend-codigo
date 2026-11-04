@@ -12,4 +12,4 @@ npm run dev     # terminal 2: app en http://localhost:5173
 
 Usuarios de prueba (en `db.json`): `admin@academia.es` / `academia123` y `lucia@correo.es` / `lucia123`.
 
-Para dejar los datos como al principio: `cp db.inicial.json db.json`.
+Para dejar los datos como al principio: `cp db.initial.json db.json`.

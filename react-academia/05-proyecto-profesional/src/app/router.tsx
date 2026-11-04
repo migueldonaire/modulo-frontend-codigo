@@ -1,32 +1,32 @@
 import { createBrowserRouter } from "react-router";
 import { Layout } from "../components/layout/Layout";
-import { RutaProtegida } from "../features/auth/RutaProtegida";
-import { CatalogoPage } from "../features/cursos/CatalogoPage";
-import { CursoPage } from "../features/cursos/CursoPage";
-import { MisCursosPage } from "../features/misCursos/MisCursosPage";
-import { InscripcionPage } from "../features/inscripcion/InscripcionPage";
+import { ProtectedRoute } from "../features/auth/ProtectedRoute";
+import { CatalogPage } from "../features/courses/CatalogPage";
+import { CoursePage } from "../features/courses/CoursePage";
+import { MyCoursesPage } from "../features/myCourses/MyCoursesPage";
+import { EnrollmentPage } from "../features/enrollment/EnrollmentPage";
 import { LoginPage } from "../features/auth/LoginPage";
 import { AdminPage } from "../features/admin/AdminPage";
-import { NoEncontradaPage } from "../components/layout/NoEncontradaPage";
+import { NotFoundPage } from "../components/layout/NotFoundPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <CatalogoPage /> },
-      { path: "cursos/:id", element: <CursoPage /> },
-      { path: "mis-cursos", element: <MisCursosPage /> },
+      { index: true, element: <CatalogPage /> },
+      { path: "courses/:id", element: <CoursePage /> },
+      { path: "my-courses", element: <MyCoursesPage /> },
       { path: "login", element: <LoginPage /> },
       {
-        element: <RutaProtegida />,
-        children: [{ path: "inscripcion", element: <InscripcionPage /> }],
+        element: <ProtectedRoute />,
+        children: [{ path: "enrollment", element: <EnrollmentPage /> }],
       },
       {
-        element: <RutaProtegida rol="admin" />,
+        element: <ProtectedRoute role="admin" />,
         children: [{ path: "admin", element: <AdminPage /> }],
       },
-      { path: "*", element: <NoEncontradaPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);

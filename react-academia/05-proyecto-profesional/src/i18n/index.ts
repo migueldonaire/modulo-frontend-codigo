@@ -8,16 +8,16 @@ i18n.use(initReactI18next).init({
     es: { translation: es },
     en: { translation: en },
   },
-  lng: localStorage.getItem("idioma") ?? "es",
+  lng: localStorage.getItem("language") ?? "es",
   fallbackLng: "es",
   interpolation: {
     escapeValue: false,
   },
 });
 
-i18n.on("languageChanged", (idioma) => {
-  localStorage.setItem("idioma", idioma);
-  document.documentElement.lang = idioma;
+i18n.on("languageChanged", (language) => {
+  localStorage.setItem("language", language);
+  document.documentElement.lang = language;
 });
 
 export default i18n;

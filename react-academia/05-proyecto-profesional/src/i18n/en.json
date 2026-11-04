@@ -1,27 +1,27 @@
 {
   "menu": {
-    "cursos": "Courses",
-    "misCursos": "My courses ({{cantidad}})",
+    "courses": "Courses",
+    "myCourses": "My courses ({{amount}})",
     "admin": "Admin",
-    "entrar": "Log in",
-    "salir": "Log out",
-    "hola": "Hi, {{nombre}}"
+    "login": "Log in",
+    "logout": "Log out",
+    "hello": "Hi, {{name}}"
   },
-  "catalogo": {
-    "titulo": "Course catalogue",
-    "cargando": "Loading courses...",
+  "catalog": {
+    "title": "Course catalogue",
+    "loading": "Loading courses...",
     "error": "Courses could not be loaded.",
-    "cursos_one": "{{count}} course",
-    "cursos_other": "{{count}} courses",
-    "todas": "All"
+    "courses_one": "{{count}} course",
+    "courses_other": "{{count}} courses",
+    "all": "All"
   },
-  "curso": {
-    "horas": "{{horas}} hours",
-    "ultimasPlazas": "Last places",
-    "anadir": "Add to My courses",
-    "quitar": "Remove from My courses"
+  "course": {
+    "hours": "{{hours}} hours",
+    "lastSeats": "Last places",
+    "add": "Add to My courses",
+    "remove": "Remove from My courses"
   },
-  "buscador": {
-    "etiqueta": "Search courses"
+  "search": {
+    "label": "Search courses"
   }
 }
