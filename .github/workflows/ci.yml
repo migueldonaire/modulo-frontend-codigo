@@ -1,0 +1,46 @@
+# CI del repositorio: comprueba que los proyectos de React pasan el lint
+# y compilan. En el 05 también pasan los tests.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  react:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - react-academia/01-componentes-props-estado
+          - react-academia/02-formularios-comunicacion
+          - react-academia/03-efectos-api-rutas
+          - react-academia/04-redux-toolkit-login
+          - react-academia/05-proyecto-profesional
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v7
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: ${{ matrix.project }}/package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Compilar
+        run: npm run build
+      - name: Tests
+        if: ${{ endsWith(matrix.project, '05-proyecto-profesional') }}
+        run: npx vitest run
