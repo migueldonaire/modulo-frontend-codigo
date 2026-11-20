@@ -1,15 +1,25 @@
 import { Navigate, Outlet, useLocation } from "react-router";
-import { useAppSelector } from "../app/hooks";
+import { useCurrentUser } from "../features/auth/useCurrentUser";
 
 type ProtectedRouteProps = {
   role?: "admin" | "student"; // opcional: si se pone, hace falta ese rol
 };
 
 export function ProtectedRoute({ role }: ProtectedRouteProps) {
-  const user = useAppSelector((state) => state.auth.user);
+  const { token, user, isLoading } = useCurrentUser();
   const location = useLocation();
 
   // Sin sesión: al login, apuntando de dónde venimos
+  if (!token) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
+
+  // Hay token, pero /me todavía no ha contestado
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
+  // /me ha fallado: el token no vale
   if (!user) {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }

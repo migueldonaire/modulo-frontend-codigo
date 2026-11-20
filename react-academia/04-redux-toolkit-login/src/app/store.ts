@@ -24,7 +24,7 @@ export const store = configureStore({
   // Con qué estado arranca el store (si es undefined, usa el initialState)
   preloadedState: {
     myCourses: loadSaved("myCourses"),
-    auth: loadSaved("auth"),
+    auth: { token: localStorage.getItem("token") }, // solo el token, nunca el usuario
   },
 });
 
@@ -32,7 +32,12 @@ export const store = configureStore({
 store.subscribe(() => {
   const { myCourses, auth } = store.getState();
   localStorage.setItem("myCourses", JSON.stringify(myCourses));
-  localStorage.setItem("auth", JSON.stringify(auth));
+  // Solo el token. Al cerrar sesión, se borra
+  if (auth.token) {
+    localStorage.setItem("token", auth.token);
+  } else {
+    localStorage.removeItem("token");
+  }
 });
 
 // Los tipos del estado y del dispatch, sacados del propio store

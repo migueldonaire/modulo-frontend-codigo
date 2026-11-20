@@ -20,8 +20,8 @@ export function LoginPage() {
     setSending(true);
     setError(null);
     try {
-      const result = await login(email, password);
-      dispatch(loggedIn(result)); // guarda la sesión en el store
+      const token = await login(email, password);
+      dispatch(loggedIn(token)); // guarda el token en el store
       navigate(from, { replace: true }); // replace: "atrás" no vuelve al login
     } catch (e) {
       setError((e as Error).message);
