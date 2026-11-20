@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { StoredUser, User } from "../features/auth/authService";
 import type { RootState } from "./store";
 
 export type Course = {
@@ -56,6 +57,16 @@ export const api = createApi({
     createEnrollment: builder.mutation<NewEnrollment, NewEnrollment>({
       query: (enrollment) => ({ url: "/enrollments", method: "POST", body: enrollment }),
     }),
+    // ¿Quién soy? Recibe el token. Con una API de verdad sería: query: () => "/auth/me"
+    // json-server no tiene /me: sacamos el id del token falso ("token-fake-1" -> "1")
+    getMe: builder.query<User, string>({
+      query: (token) => `/users/${token.replace("token-fake-", "")}`,
+      // json-server devuelve también la contraseña: la quitamos (una API de verdad nunca la manda)
+      transformResponse: (response: StoredUser) => {
+        const { password: _password, ...user } = response;
+        return user;
+      },
+    }),
   }),
 });
 
@@ -66,4 +77,5 @@ export const {
   useCreateCourseMutation,
   useDeleteCourseMutation,
   useCreateEnrollmentMutation,
+  useGetMeQuery,
 } = api;

@@ -2,17 +2,20 @@ import { NavLink, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loggedOut } from "../../features/auth/authSlice";
+import { useCurrentUser } from "../../features/auth/useCurrentUser";
+import { api } from "../../app/api";
 import { LanguageSelector } from "../ui/LanguageSelector";
 
 export function Header() {
   const { t } = useTranslation();
   const amount = useAppSelector((state) => state.myCourses.ids.length);
-  const user = useAppSelector((state) => state.auth.user);
+  const { user } = useCurrentUser(); // undefined si no ha entrado
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   function logout() {
     dispatch(loggedOut());
+    dispatch(api.util.resetApiState()); // olvida la caché: el usuario de /me ya no sirve
     navigate("/");
   }
 
